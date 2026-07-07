@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Bharat – AI Civic Companion</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-landmark"></i>
+            <span data-key="nav-brand">Smart Bharat</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home" data-key="nav-home">Home</a></li>
+            <li><a href="#schemes" data-key="nav-schemes">Schemes</a></li>
+            <li><a href="#complaints" data-key="nav-complaints">Complaints</a></li>
+            <li><a href="#checklist" data-key="nav-checklist">Documents</a></li>
+            <li><a href="#emergency" data-key="nav-emergency">Emergency</a></li>
+        </ul>
+        <div class="lang-switch">
+            <button id="langBtn" onclick="toggleLanguage()">हिन्दी</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 data-key="hero-title">Empowering Every Citizen with AI</h1>
+            <p data-key="hero-subtitle">Access government schemes, track complaints, and get AI-powered civic guidance in seconds.</p>
+            <div class="hero-btns">
+                <a href="#chatbot" class="btn primary" data-key="hero-btn-chat">Talk to AI</a>
+                <a href="#schemes" class="btn secondary" data-key="hero-btn-schemes">Search Schemes</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chatbot Interface -->
+    <section id="chatbot" class="section">
+        <h2 class="section-title" data-key="chat-title">AI Civic Assistant</h2>
+        <div class="chat-container">
+            <div id="chat-window" class="chat-window">
+                <div class="message bot-msg">
+                    <p data-key="chat-welcome">Namaste! How can I assist you with civic services today?</p>
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="Ask about Aadhaar, Ration Card, etc..." data-key="chat-input">
+                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Government Schemes Search -->
+    <section id="schemes" class="section bg-light">
+        <h2 class="section-title" data-key="schemes-title">Government Schemes</h2>
+        <div class="search-bar">
+            <input type="text" id="schemeSearch" placeholder="Search by name or category..." onkeyup="searchSchemes()">
+        </div>
+        <div id="schemeResults" class="grid-container">
+            <!-- Dynamically populated -->
+        </div>
+    </section>
+
+    <!-- Complaint Tracking Page -->
+    <section id="complaints" class="section">
+        <h2 class="section-title" data-key="complaints-title">Complaint Tracking</h2>
+        <div class="complaint-layout">
+            <div class="complaint-form card">
+                <h3 data-key="form-title">File a New Complaint</h3>
+                <form id="complaintForm" onsubmit="submitComplaint(event)">
+                    <input type="text" id="compName" placeholder="Your Name" required>
+                    <select id="compType" required>
+                        <option value="" disabled selected data-key="opt-type">Category</option>
+                        <option value="Roads">Roads/Potholes</option>
+                        <option value="Electricity">Electricity</option>
+                        <option value="Water">Water Supply</option>
+                        <option value="Sanitation">Sanitation</option>
+                    </select>
+                    <textarea id="compDesc" placeholder="Describe the issue..." required></textarea>
+                    <button type="submit" class="btn primary" data-key="form-submit">Submit Complaint</button>
+                </form>
+            </div>
+            <div class="complaint-list card">
+                <h3 data-key="list-title">Your Recent Complaints</h3>
+                <div id="compHistory">
+                    <p class="empty-msg" data-key="no-complaints">No complaints filed yet.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Document Checklist -->
+    <section id="checklist" class="section bg-light">
+        <h2 class="section-title" data-key="checklist-title">Document Checklist</h2>
+        <div class="grid-container">
+            <div class="card doc-card">
+                <i class="fas fa-id-card"></i>
+                <h4 data-key="doc-aadhaar">Aadhaar Card</h4>
+                <ul>
+                    <li data-key="doc-proof-id">Proof of Identity</li>
+                    <li data-key="doc-proof-addr">Proof of Address</li>
+                    <li data-key="doc-dob">DOB Document</li>
+                </ul>
+            </div>
+            <div class="card doc-card">
+                <i class="fas fa-passport"></i>
+                <h4 data-key="doc-passport">Passport</h4>
+                <ul>
+                    <li data-key="doc-addr-proof">Address Proof</li>
+                    <li data-key="doc-edu-proof">Educational Proof</li>
+                    <li data-key="doc-photo">2 Passport Photos</li>
+                </ul>
+            </div>
+            <div class="card doc-card">
+                <i class="fas fa-file-invoice"></i>
+                <h4 data-key="doc-ration">Ration Card</h4>
+                <ul>
+                    <li data-key="doc-income">Income Certificate</li>
+                    <li data-key="doc-residency">Residency Proof</li>
+                    <li data-key="doc-family-photo">Family Group Photo</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Contacts -->
+    <section id="emergency" class="section">
+        <h2 class="section-title" data-key="emergency-title">Emergency Contacts</h2>
+        <div class="emergency-grid">
+            <div class="emergency-item police">
+                <h3>100 / 112</h3>
+                <p data-key="em-police">Police</p>
+            </div>
+            <div class="emergency-item fire">
+                <h3>101</h3>
+                <p data-key="em-fire">Fire Brigade</p>
+            </div>
+            <div class="emergency-item ambulance">
+                <h3>102 / 108</h3>
+                <p data-key="em-ambulance">Ambulance</p>
+            </div>
+            <div class="emergency-item women">
+                <h3>1091</h3>
+                <p data-key="em-women">Women Helpline</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 Smart Bharat - AI Civic Companion. Empowering India.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
